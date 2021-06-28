@@ -43,4 +43,3 @@ resource "azurerm_dev_test_virtual_network" "main" {
 }
 
 
-

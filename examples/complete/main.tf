@@ -11,7 +11,13 @@ module "dev-test-lab" {
   resource_group_name   = "rg-shared-westeurope-01"
   location              = "westeurope"
 
-  
+  dev_test_lab_settings = {
+    name                            = "mydemoproject1"
+    storage_type                    = "Premium"
+    use_public_ip_address           = "Allow"
+    use_in_virtual_machine_creation = "Allow"
+  }
+
   # Tags for Azure Resources
   tags = {
     Terraform   = "true"
