@@ -18,6 +18,15 @@ module "dev-test-lab" {
     use_in_virtual_machine_creation = "Allow"
   }
 
+  virtual_machine_name       = "vm-linux"
+  os_flavor                  = "linux"
+  linux_distribution_name    = "ubuntu1804"
+  virtual_machine_size       = "Standard_A2_v2"
+  generate_admin_ssh_key     = false
+  admin_ssh_key_data         = "~/.ssh/id_rsa.pub"
+  instances_count            = 2
+  disallow_public_ip_address = false
+
   # Tags for Azure Resources
   tags = {
     Terraform   = "true"
