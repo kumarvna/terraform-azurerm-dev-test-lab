@@ -47,3 +47,42 @@ output "dev_test_lab_virtual_network_unique_identifier" {
   description = "The unique immutable identifier of the Dev Test Virtual Network"
   value       = module.dev-test-lab.dev_test_lab_virtual_network_unique_identifier
 }
+
+output "private_key_pem" {
+  description = "The private key data in PEM format"
+  value       = module.dev-test-lab.private_key_pem
+  sensitive   = true
+}
+
+output "public_key_pem" {
+  description = "The public key data in PEM format"
+  value       = module.dev-test-lab.public_key_pem
+  sensitive   = true
+}
+
+output "public_key_openssh" {
+  description = "The public key data in OpenSSH `authorized_keys` format, if the selected private key format is compatible. All RSA keys are supported, and `ECDSA` keys with curves `P256`, `P384` and `P521` are supported. This attribute is empty if an incompatible ECDSA curve is selected"
+  value       = module.dev-test-lab.public_key_openssh
+  sensitive   = true
+}
+
+output "admin_password" {
+  description = "The Password associated with the `admin_username` used to login to this Virtual Machine"
+  value       = module.dev-test-lab.admin_password
+  sensitive   = true
+}
+
+output "dev_test_lab_linux_virtual_machine_id" {
+  description = "The ID of the Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_linux_virtual_machine_id
+}
+
+output "dev_test_lab_linux_virtual_machine_fqdn" {
+  description = "The FQDN of the Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_linux_virtual_machine_fqdn
+}
+
+output "dev_test_lab_linux_virtual_machine_unique_identifier" {
+  description = "The unique immutable identifier of the Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_linux_virtual_machine_unique_identifier
+}

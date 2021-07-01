@@ -35,34 +35,22 @@ variable "random_password_length" {
   default     = 24
 }
 
-variable "virtual_machine_name" {
-  description = "The name of the virtual machine."
-  default     = ""
-}
-
-variable "os_flavor" {
-  description = "Specify the flavor of the operating system image to deploy Virtual Machine. Valid values are `windows` and `linux`"
-  default     = "windows"
-}
-
-variable "instances_count" {
-  description = "The number of Virtual Machines required."
-  default     = 1
-}
-
-variable "virtual_machine_size" {
-  description = "The Virtual Machine SKU for the Virtual Machine, Default is Standard_A2_V2"
-  default     = "Standard_A2_v2"
-}
-
-variable "storage_type" {
-  description = "The type of Storage to use on this Virtual Machine. Possible values are `Standard` and `Premium`"
-  default     = "Premium"
-}
-
-variable "allow_claim" {
-  description = "Can this Virtual Machine be claimed by users?"
-  default     = true
+variable "linux_virtual_machine" {
+  description = "Manages a Linux Virtual Machine within a Dev Test Lab."
+  type = map(object({
+    virtual_machine_size       = string
+    storage_type               = string
+    admin_username             = string
+    allow_claim                = optional(bool)
+    disallow_public_ip_address = optional(bool)
+    virtual_machine_notes      = optional(string)
+    gallery_image_reference = optional(map(object({
+      publisher = string
+      offer     = string
+      sku       = string
+      version   = string
+    })))
+  }))
 }
 
 variable "generate_admin_ssh_key" {
@@ -75,35 +63,9 @@ variable "admin_ssh_key_data" {
   default     = ""
 }
 
-variable "admin_username" {
-  description = "The username of the local administrator used for the Virtual Machine."
-  default     = "azureadmin"
-}
-
 variable "admin_password" {
   description = "The Password which should be used for the local-administrator on this Virtual Machine"
   default     = null
-}
-
-variable "disallow_public_ip_address" {
-  description = "Reference to a Public IP Address to associate with the NIC"
-  default     = false
-}
-
-variable "virtual_machine_notes" {
-  description = "Any notes about the Virtual Machine"
-  default     = ""
-}
-
-variable "gallery_image_reference" {
-  description = "Provide the custom image to this module if the default variants are not sufficient"
-  type = map(object({
-    publisher = string
-    offer     = string
-    sku       = string
-    version   = string
-  }))
-  default = null
 }
 
 variable "linux_distribution_list" {
