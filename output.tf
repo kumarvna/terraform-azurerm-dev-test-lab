@@ -35,17 +35,17 @@ output "dev_test_lab_unique_identifier" {
 
 output "dev_test_lab_virtual_network_id" {
   description = "The ID of the Dev Test Virtual Network"
-  value       = azurerm_dev_test_virtual_network.main.id
+  value       = azurerm_dev_test_virtual_network.main.0.id
 }
 
 output "dev_test_lab_subnet_name" {
   description = "The name of the Subnet for this Virtual Network."
-  value       = azurerm_dev_test_virtual_network.main.subnet[0].name
+  value       = azurerm_dev_test_virtual_network.main.0.subnet[0].name
 }
 
 output "dev_test_lab_virtual_network_unique_identifier" {
   description = "The unique immutable identifier of the Dev Test Virtual Network"
-  value       = azurerm_dev_test_virtual_network.main.unique_identifier
+  value       = azurerm_dev_test_virtual_network.main.0.unique_identifier
 }
 
 output "private_key_pem" {

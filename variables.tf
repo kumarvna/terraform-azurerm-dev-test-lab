@@ -35,6 +35,21 @@ variable "random_password_length" {
   default     = 24
 }
 
+variable "use_custom_virtual_network" {
+  description = "Specify the already avialable virutal network"
+  default     = false
+}
+
+variable "virtual_network_name" {
+  description = "The name of the virtual network"
+  default     = ""
+}
+
+variable "subnet_name" {
+  description = "The name of the subnet to use in VM scale set"
+  default     = ""
+}
+
 variable "linux_virtual_machine" {
   description = "Manages a Linux Virtual Machine within a Dev Test Lab."
   type = map(object({
