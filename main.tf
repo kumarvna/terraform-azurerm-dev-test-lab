@@ -20,19 +20,6 @@ data "azurerm_resource_group" "rgrp" {
   name  = var.resource_group_name
 }
 
-data "azurerm_virtual_network" "vnet" {
-  count               = var.use_custom_virtual_network ? 1 : 0
-  name                = var.virtual_network_name
-  resource_group_name = local.resource_group_name
-}
-
-data "azurerm_subnet" "snet" {
-  count                = var.use_custom_virtual_network ? 1 : 0
-  name                 = var.subnet_name
-  virtual_network_name = data.azurerm_virtual_network.vnet.0.name
-  resource_group_name  = local.resource_group_name
-}
-
 resource "azurerm_resource_group" "rg" {
   count    = var.create_resource_group ? 1 : 0
   name     = var.resource_group_name
@@ -49,7 +36,6 @@ resource "azurerm_dev_test_lab" "main" {
 }
 
 resource "azurerm_dev_test_virtual_network" "main" {
-  count               = var.use_custom_virtual_network == false ? 1 : 0
   name                = format("%s-network", var.dev_test_lab_settings.name)
   resource_group_name = local.resource_group_name
   lab_name            = azurerm_dev_test_lab.main.name
@@ -93,8 +79,8 @@ resource "azurerm_dev_test_linux_virtual_machine" "main" {
   lab_name                   = azurerm_dev_test_lab.main.name
   resource_group_name        = local.resource_group_name
   location                   = local.location
-  lab_virtual_network_id     = var.use_custom_virtual_network == true ? data.azurerm_virtual_network.vnet.0.id : azurerm_dev_test_virtual_network.main.0.id
-  lab_subnet_name            = var.use_custom_virtual_network == true ? data.azurerm_subnet.snet.0.name : azurerm_dev_test_virtual_network.main.0.subnet[0].name
+  lab_virtual_network_id     = azurerm_dev_test_virtual_network.main.id
+  lab_subnet_name            = azurerm_dev_test_virtual_network.main.subnet[0].name
   size                       = each.value["virtual_machine_size"]
   storage_type               = each.value["storage_type"]
   allow_claim                = each.value["allow_claim"]
