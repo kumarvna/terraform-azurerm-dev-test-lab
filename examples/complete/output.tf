@@ -86,3 +86,18 @@ output "dev_test_lab_linux_virtual_machine_unique_identifier" {
   description = "The unique immutable identifier of the Virtual Machine"
   value       = module.dev-test-lab.dev_test_lab_linux_virtual_machine_unique_identifier
 }
+
+output "dev_test_lab_windows_virtual_machine_id" {
+  description = "The ID of the Windows Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_windows_virtual_machine_id
+}
+
+output "dev_test_lab_windows_virtual_machine_fqdn" {
+  description = "The FQDN of the Windows Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_windows_virtual_machine_fqdn
+}
+
+output "dev_test_lab_windows_virtual_machine_unique_identifier" {
+  description = "The unique immutable identifier of the Windows Virtual Machine"
+  value       = module.dev-test-lab.dev_test_lab_windows_virtual_machine_unique_identifier
+}

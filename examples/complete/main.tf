@@ -27,23 +27,43 @@ module "dev-test-lab" {
       disallow_public_ip_address = false
     },
     vm-linux2 = {
-      linux_distribution_name    = "centos75"
       virtual_machine_size       = "Standard_A4_v2"
       admin_username             = "azureadmin"
       storage_type               = "Premium"
       disallow_public_ip_address = true
-    },
-    vm-linux3 = {
-      linux_distribution_name    = "centos81"
-      virtual_machine_size       = "Standard_A4_v2"
-      admin_username             = "azureadmin"
-      storage_type               = "Premium"
-      disallow_public_ip_address = true
+      gallery_image_reference = {
+        publisher = "RedHat"
+        offer     = "RHEL"
+        sku       = "8"
+        version   = "latest"
+      }
     },
   }
+
   generate_admin_ssh_key = true
   #  admin_password         = "P@$$w0rd@1234!"
   #
+  windows_virtual_machine = {
+    win2019vm1 = {
+      windows_distribution_name  = "windows2019dc"
+      virtual_machine_size       = "Standard_A2_v2"
+      admin_username             = "azureadmin"
+      storage_type               = "Premium"
+      disallow_public_ip_address = false
+    },
+    windesktop10vm1 = {
+      virtual_machine_size       = "Standard_A2_v2"
+      admin_username             = "azureadmin"
+      storage_type               = "Premium"
+      disallow_public_ip_address = false
+      gallery_image_reference = {
+        publisher = "MicrosoftWindowsDesktop"
+        offer     = "Windows-10"
+        sku       = "20h2-ent"
+        version   = "latest"
+      }
+    }
+  }
 
   # Tags for Azure Resources
   tags = {

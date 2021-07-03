@@ -74,15 +74,31 @@ output "admin_password" {
 
 output "dev_test_lab_linux_virtual_machine_id" {
   description = "The ID of the Virtual Machine"
-  value       = { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.id }
+  value       = var.linux_virtual_machine != null ? { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.id } : null
 }
 
 output "dev_test_lab_linux_virtual_machine_fqdn" {
   description = "The FQDN of the Virtual Machine"
-  value       = { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.fqdn }
+  value       = var.linux_virtual_machine != null ? { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.fqdn } : null
 }
 
 output "dev_test_lab_linux_virtual_machine_unique_identifier" {
   description = "The unique immutable identifier of the Virtual Machine"
-  value       = { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.unique_identifier }
+  value       = var.linux_virtual_machine != null ? { for k, v in azurerm_dev_test_linux_virtual_machine.main : k => v.unique_identifier } : null
+}
+
+
+output "dev_test_lab_windows_virtual_machine_id" {
+  description = "The ID of the Windows Virtual Machine"
+  value       = var.windows_virtual_machine != null ? { for k, v in azurerm_dev_test_windows_virtual_machine.main : k => v.id } : null
+}
+
+output "dev_test_lab_windows_virtual_machine_fqdn" {
+  description = "The FQDN of the Windows Virtual Machine"
+  value       = var.windows_virtual_machine != null ? { for k, v in azurerm_dev_test_windows_virtual_machine.main : k => v.fqdn } : null
+}
+
+output "dev_test_lab_windows_virtual_machine_unique_identifier" {
+  description = "The unique immutable identifier of the Windows Virtual Machine"
+  value       = var.windows_virtual_machine != null ? { for k, v in azurerm_dev_test_windows_virtual_machine.main : k => v.unique_identifier } : null
 }

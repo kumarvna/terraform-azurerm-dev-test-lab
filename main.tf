@@ -61,12 +61,14 @@ resource "tls_private_key" "rsa" {
 # Random Resources
 #-----------------------------------
 resource "random_password" "passwd" {
-  count       = var.generate_admin_ssh_key == false && var.admin_password == null ? 1 : 0
-  length      = var.random_password_length
-  min_upper   = 4
-  min_lower   = 2
-  min_numeric = 4
-  special     = false
+  count            = var.generate_admin_ssh_key == false || var.admin_password == null ? 1 : 0
+  length           = var.random_password_length
+  min_upper        = 2
+  min_lower        = 2
+  min_numeric      = 2
+  special          = true
+  override_special = "@#!="
+  min_special      = 1
 
   keepers = {
     password = var.linux_distribution_name
@@ -99,3 +101,27 @@ resource "azurerm_dev_test_linux_virtual_machine" "main" {
   }
 }
 
+resource "azurerm_dev_test_windows_virtual_machine" "main" {
+  for_each                   = var.windows_virtual_machine != null ? { for k, v in var.windows_virtual_machine : k => v if v != null } : {}
+  name                       = substr(each.key, 0, 15) # Charcter lengh for linux - 62 and windows - 15
+  lab_name                   = azurerm_dev_test_lab.main.name
+  resource_group_name        = local.resource_group_name
+  location                   = local.location
+  lab_virtual_network_id     = azurerm_dev_test_virtual_network.main.id
+  lab_subnet_name            = azurerm_dev_test_virtual_network.main.subnet[0].name
+  size                       = each.value["virtual_machine_size"]
+  storage_type               = each.value["storage_type"]
+  allow_claim                = each.value["allow_claim"]
+  username                   = each.value["admin_username"]
+  password                   = var.admin_password == null ? element(concat(random_password.passwd.*.result, [""]), 0) : var.admin_password
+  disallow_public_ip_address = each.value["disallow_public_ip_address"]
+  tags                       = merge({ "ResourceName" = each.key }, var.tags, )
+  notes                      = each.value["virtual_machine_notes"]
+
+  gallery_image_reference {
+    publisher = each.value.gallery_image_reference != null ? each.value.gallery_image_reference["publisher"] : var.windows_distribution_list[lower(var.windows_distribution_name)]["publisher"]
+    offer     = each.value.gallery_image_reference != null ? each.value.gallery_image_reference["offer"] : var.windows_distribution_list[lower(var.windows_distribution_name)]["offer"]
+    sku       = each.value.gallery_image_reference != null ? each.value.gallery_image_reference["sku"] : var.windows_distribution_list[lower(var.windows_distribution_name)]["sku"]
+    version   = each.value.gallery_image_reference != null ? each.value.gallery_image_reference["version"] : var.windows_distribution_list[lower(var.windows_distribution_name)]["version"]
+  }
+}

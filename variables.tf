@@ -44,13 +44,33 @@ variable "linux_virtual_machine" {
     allow_claim                = optional(bool)
     disallow_public_ip_address = optional(bool)
     virtual_machine_notes      = optional(string)
-    gallery_image_reference = optional(map(object({
+    gallery_image_reference = optional(object({
       publisher = string
       offer     = string
       sku       = string
       version   = string
-    })))
+    }))
   }))
+  default = null
+}
+
+variable "windows_virtual_machine" {
+  description = "Manages a Windows Virtual Machine within a Dev Test Lab."
+  type = map(object({
+    virtual_machine_size       = string
+    storage_type               = string
+    admin_username             = string
+    allow_claim                = optional(bool)
+    disallow_public_ip_address = optional(bool)
+    virtual_machine_notes      = optional(string)
+    gallery_image_reference = optional(object({
+      publisher = string
+      offer     = string
+      sku       = string
+      version   = string
+    }))
+  }))
+  default = null
 }
 
 variable "generate_admin_ssh_key" {
