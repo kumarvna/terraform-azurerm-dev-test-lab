@@ -1,3 +1,10 @@
+# Dev Test Labs Terraform Module
+
+This terraform module designed to deploy Azure DevTest Labs that enables developers on teams to efficiently self-manage virtual machines (VMs) and PaaS resources without waiting for approvals. DevTest Labs creates labs consisting of pre-configured bases.
+
+## Module Usage
+
+```hcl
 module "dev-test-lab" {
   source  = "kumarvna/dev-test-lab/azurerm"
   version = "1.0.0"
@@ -86,3 +93,16 @@ module "dev-test-lab" {
     Owner       = "test-user"
   }
 }
+```
+
+## Terraform Usage
+
+To run this example you need to execute following Terraform commands
+
+```hcl
+terraform init
+terraform plan
+terraform apply
+```
+
+Run `terraform destroy` when you don't need these resources.

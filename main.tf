@@ -125,3 +125,4 @@ resource "azurerm_dev_test_windows_virtual_machine" "main" {
     version   = each.value.gallery_image_reference != null ? each.value.gallery_image_reference["version"] : var.windows_distribution_list[lower(var.windows_distribution_name)]["version"]
   }
 }
+

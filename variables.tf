@@ -13,12 +13,6 @@ variable "location" {
   default     = ""
 }
 
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-  default     = {}
-}
-
 variable "dev_test_lab_settings" {
   description = "Specifies the arguments for dev test lab creation"
   type = object({
@@ -83,7 +77,7 @@ variable "admin_ssh_key_data" {
   default     = ""
 }
 
-variable "admin_password" {
+variable "" {admin_password
   description = "The Password which should be used for the local-administrator on this Virtual Machine"
   default     = null
 }
@@ -139,6 +133,48 @@ variable "linux_distribution_list" {
       sku       = "Stable"
       version   = "latest"
     },
+
+    mssql2019ent-rhel8 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-rhel8"
+      sku       = "enterprise"
+      version   = "latest"
+    },
+
+    mssql2019std-rhel8 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-rhel8"
+      sku       = "standard"
+      version   = "latest"
+    },
+
+    mssql2019dev-rhel8 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-rhel8"
+      sku       = "sqldev"
+      version   = "latest"
+    },
+
+    mssql2019ent-ubuntu1804 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ubuntu1804"
+      sku       = "enterprise"
+      version   = "latest"
+    },
+
+    mssql2019std-ubuntu1804 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ubuntu1804"
+      sku       = "standard"
+      version   = "latest"
+    },
+
+    mssql2019dev-ubuntu1804 = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ubuntu1804"
+      sku       = "sqldev"
+      version   = "latest"
+    },
   }
 }
 
@@ -184,10 +220,65 @@ variable "windows_distribution_list" {
       sku       = "2016-Datacenter-Server-Core"
       version   = "latest"
     },
+
+    mssql2017exp = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2019"
+      sku       = "express"
+      version   = "latest"
+    },
+
+    mssql2017dev = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2019"
+      sku       = "sqldev"
+      version   = "latest"
+    },
+
+    mssql2017std = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2019"
+      sku       = "standard"
+      version   = "latest"
+    },
+
+    mssql2017ent = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2019"
+      sku       = "enterprise"
+      version   = "latest"
+    },
+
+    mssql2019std = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ws2019"
+      sku       = "standard"
+      version   = "latest"
+    },
+
+    mssql2019dev = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ws2019"
+      sku       = "sqldev"
+      version   = "latest"
+    },
+
+    mssql2019ent = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "sql2019-ws2019"
+      sku       = "enterprise"
+      version   = "latest"
+    },
   }
 }
 
 variable "windows_distribution_name" {
   default     = "windows2019dc"
   description = "Variable to pick an OS flavour for Windows based VM. Possible values include: winserver, wincore, winsql"
+}
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
 }
