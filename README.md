@@ -97,11 +97,11 @@ module "dev-test-lab" {
 
 ## Default Local Administrator and the Password
 
-This module utilizes __`azureadmin`__ as a local administrator on virtual machines. If you want to you use custom username, then specify the same by setting up the argument `admin_username` with a valid user string.
+This module utilizes __`azureadmin`__ as a local administrator on virtual machines. If you want to you use custom username, then specify the same by setting up the argument **`admin_username`** with a valid user string.
 
-By default, this module generates a strong password for all virtual machines also allows you to change the length of the random password (currently 24) using the `random_password_length = 32` variable. If you want to set the custom password, specify the argument `admin_password` with a valid string.
+By default, this module generates a strong password for all virtual machines also allows you to change the length of the random password (currently 24) using the **`random_password_length = 32`** variable. If you want to set the custom password, specify the argument **`admin_password`** with a valid string.
 
-This module also generates SSH2 Key pair for Linux servers by default, however, it is only recommended to use for dev environment. For production environments, please generate your own SSH2 key with a passphrase and input the key by providing the path to the argument `admin_ssh_key_data`.
+This module also generates SSH2 Key pair for Linux servers by default, however, it is only recommended to use for dev environment. For production environments, please generate your own SSH2 key with a passphrase and input the key by providing the path to the argument **`admin_ssh_key_data`**.
 
 ## Pre-Defined Windows and Linux VM Images
 
@@ -163,8 +163,8 @@ module "dev-test-lab" {
 | Name | Version |
 |------|---------|
 | azurerm | >= 2.59.0 |
-| random | n/a |
-| tls | n/a |
+| random | >=3.1.0 |
+| tls | >=3.1.0 |
 
 ## Inputs
 

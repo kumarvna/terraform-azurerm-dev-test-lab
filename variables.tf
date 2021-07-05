@@ -77,7 +77,7 @@ variable "admin_ssh_key_data" {
   default     = ""
 }
 
-variable "" {admin_password
+variable "admin_password" {
   description = "The Password which should be used for the local-administrator on this Virtual Machine"
   default     = null
 }
